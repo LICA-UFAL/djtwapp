@@ -68,3 +68,7 @@ class User(AbstractBaseUser):
     @property
     def is_admin(self):
         return self.admin
+
+    @classmethod
+    def save_instance(cls, user):
+        cls.objects.create_user(user.username,user.password)

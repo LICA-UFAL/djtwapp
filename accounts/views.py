@@ -33,14 +33,19 @@ def login(request):
 
 def cadastro(request):
     if(request.method == "POST"):
-        user = User.objects.create_user(
-            request.POST["username"], request.POST["password"])
-        user.save()
+        register_user_form = RegisterUserForm(request.POST)
+
+        if(register_user_form.is_valid()):
+            user = register_user_form.save(commit=False)
+
+            User.save_instance(user)
+
+            redirect(settings.REGISTER_REDIRECT_URL)
 
     else:
-        userform = RegisterUserForm()
+        register_user_form = RegisterUserForm()
     userform = RegisterUserForm()
-    return render(request, "cadastro.html", {"form": userform, "action_url": "/accounts/cadastro/"})
+    return render(request, "cadastro.html", {"form": register_user_form, "action_url": "/accounts/cadastro/"})
 
 
 def logout(request):
