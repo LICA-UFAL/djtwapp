@@ -40,7 +40,7 @@ def cadastro(request):
 
             User.save_instance(user)
 
-            redirect(settings.REGISTER_REDIRECT_URL)
+            return redirect(settings.REGISTER_REDIRECT_URL)
 
     else:
         register_user_form = RegisterUserForm()
