@@ -1,29 +1,49 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import auth
+from django.conf import settings
 
-from .forms import UserForm
+from .forms import RegisterUserForm, LoginForm
+from .models import User
 
 # Create your views here.
 
+
 def login(request):
-	if(request.method=="POST"):
-		userform = UserForm(request.POST)
+    if(request.method == "POST"):
+        loginform = LoginForm(request.POST)
 
-	else:
-		userform = UserForm()
+        if(loginform.is_valid()):
+            username = loginform.cleaned_data.get("username")
+            password = loginform.cleaned_data.get("password")
+            user = auth.authenticate(
+                request, username=username, password=password)
 
-	return render(request, "login", {"form":userform, "action_url":"/"})
+            if(user is not None):
+                auth.login(request, user)
+
+                return redirect(settings.LOGIN_REDIRECT_URL)
+            else:
+                print("error")
+
+    else:
+        userform = LoginForm()
+
+    return render(request, "login.html", {"form": LoginForm, "action_url": "/accounts/login/"})
+
 
 def cadastro(request):
-	if(request.method=="POST"):
-		userform = UserForm(request.POST)
-		if(userform.is_valid()):
-			userform.save()
+    if(request.method == "POST"):
+        user = User.objects.create_user(
+            request.POST["username"], request.POST["password"])
+        user.save()
 
-	else:
-		userform=UserForm()
-
-	return render(request, "cadastro.html", {"form":userform,"action_url":"/accounts/cadastro/"})
+    else:
+        userform = RegisterUserForm()
+    userform = RegisterUserForm()
+    return render(request, "cadastro.html", {"form": userform, "action_url": "/accounts/cadastro/"})
 
 
 def logout(request):
-	pass
+    auth.logout(request)
+
+    return redirect(settings.LOGOUT_REDIRECT_URL)

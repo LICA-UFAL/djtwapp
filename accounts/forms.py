@@ -1,10 +1,16 @@
-from django.forms import ModelForm
+from django import forms
 from .models import User
 
-class UserForm(ModelForm):
-	class Meta:
-		model=User
-		fields=("username","password")
 
-	def is_valid(self):
-		return True
+class RegisterUserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ("username",)
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

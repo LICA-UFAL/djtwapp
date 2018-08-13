@@ -1,8 +1,9 @@
 from django.urls import path
 
-from .views import cadastro,login,logout
+from .views import cadastro, login, logout
 
-urlpatterns =[
-	path("cadastro/",cadastro,name="cadastro")
+urlpatterns = [
+    path("cadastro/", cadastro, name="cadastro"),
+    path("login/", login, name="login"),
+    path("logout/", logout, name="logout")
 ]
-
