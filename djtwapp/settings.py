@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 import django_heroku
+import tweepy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "https://djtwapp.herokuapp.com/"]
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'profiles',
 ]
 
+# TWEEPY_API=tweepy.API()
 AUTH_USER_MODEL = "accounts.User"
 
 LOGIN_URL = "/accounts/login/"
