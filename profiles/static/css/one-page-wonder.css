@@ -1,5 +1,6 @@
 body {
   font-family: 'Lato';
+  height: 100%;
 }
 
 h1,
@@ -49,6 +50,7 @@ h6 {
 }
 
 header.masthead {
+  height: 100%;
   position: relative;
   overflow: hidden;
   padding-top: calc(7rem + 72px);
@@ -57,12 +59,12 @@ header.masthead {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
-  background-size: cover;
 }
 
 header.masthead .masthead-content {
   z-index: 1;
   position: relative;
+  min-height: 100%; 
 }
 
 header.masthead .masthead-content .masthead-heading {
