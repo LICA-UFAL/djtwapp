@@ -15,4 +15,6 @@ Django = "*"
 python_version = "3.6"
 
 [scripts]
+makemigrations = "python manage.py makemigrations"
+migrate = "python manage.py migrate"
 server = "python manage.py runserver"
