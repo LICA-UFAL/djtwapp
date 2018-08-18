@@ -8,11 +8,16 @@
           <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
               <li class="nav-item">
-                <a class="nav-link" href="/accounts/cadastro/">{{ user }}</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ user }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/accounts/logout">Sair</a>
+                  </div>
+                </li>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/accounts/logout/">Logout</a>
-              </li>
+
             {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="/accounts/cadastro/">Cadastro</a>
