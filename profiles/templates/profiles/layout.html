@@ -26,17 +26,11 @@
   <body>
 
     <!-- Navigation -->
-    {% include "navbar.html" %}
-
-    <header class="masthead text-left text-white">
-      <div class="masthead-content">
-        <div class="container">
-          <h1 class="masthead-heading mb-0">Bem-vindo</h1>
-          <h2 class="masthead-subheading mb-0"></h2>
-          <a href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Learn More</a>
-        </div>
-      </div>
-    </header>
+    {% include "profiles/navbar.html" %}
+    
+    <!-- Content-->
+    {% block content %}
+    {% endblock %}
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
