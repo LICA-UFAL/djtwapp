@@ -1,0 +1,15 @@
+{% extends 'profiles/layout.html' %}
+
+{% block content %}
+<header class="masthead text-center text-white">
+  <div class="masthead-content">
+    <div class="container">
+	<p>Welcome to login</p>
+	<form action={{action_url}} method="POST">
+		{% csrf_token %} {{form.as_p}}
+		<input type="submit" class="btn btn-primary" value="Entrar">
+	</form>
+    </div>
+  </div>
+</header>
+{% endblock %}
