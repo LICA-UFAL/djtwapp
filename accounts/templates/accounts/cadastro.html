@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Cadastro</title>
-</head>
-	<body>
+{% extends 'profiles/layout.html' %} 
+
+{% block content %}
+<div class="container text-center">
 	<p>Welcome to cadastro</p>
 	<form action={{action_url}} method="POST">
-		{% csrf_token %}
-		{{form}}
-		<input type="submit" value="Submit"> 
+		{% csrf_token %} 
+		{{form.as_p}}
+		<input type="submit" value="Submit">
 	</form>
-</body>
-</html>
+</div>
+{% endblock %}
