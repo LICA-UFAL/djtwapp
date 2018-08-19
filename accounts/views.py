@@ -26,9 +26,9 @@ def login(request):
                 print("error")
 
     else:
-        userform = LoginForm()
+        loginform = LoginForm()
 
-    return render(request, "accounts/login.html", {"form": LoginForm, "action_url": "/accounts/login/"})
+    return render(request, "accounts/login.html", {"form": loginform, "action_url": "/accounts/login/"})
 
 
 def cadastro(request):
@@ -44,7 +44,6 @@ def cadastro(request):
 
     else:
         register_user_form = RegisterUserForm()
-    userform = RegisterUserForm()
     return render(request, "accounts/cadastro.html", {"form": register_user_form, "action_url": "/accounts/cadastro/"})
 
 
