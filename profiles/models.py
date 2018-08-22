@@ -1,25 +1,31 @@
 from django.db import models
 
-BOT_EXPLICATIONS = [
-    "È bot por causa da quantidade de posts",
-    "È bot por causa do blablabla",
-    "È bot por causa do blablabla2",
-]
-# Create your models here.
 
+class Twitter_account(models.Model):
+    name = models.CharField(max_length=255)
+    id = models.IntegerField(primary_key=True, unique=True)
+    total_votes = models.IntegerField(default=0)
+    bot_votes = models.IntegerField(default=0)
 
+    answer_1_votes = models.IntegerField(default=0)
+    answer_2_votes = models.IntegerField(default=0)
+    answer_3_votes = models.IntegerField(default=0)
+    answer_4_votes = models.IntegerField(default=0)
+    answer_5_votes = models.IntegerField(default=0)
 
-twitter_accounts_attrs = {
-    'name': models.CharField(max_length=32),
-    'id' : models.IntegerField(primary_key=True, unique=True),
-    'name' : models.CharField(max_length=255),
-    'total_votes' : models.IntegerField(default=0),
-    'bot_votes' : models.IntegerField(default=0),
-    '__module__': 'profiles.models'
-}
+    def vote(self, user, is_bot=False, answers=None):
+        user.vote_count += 1
+        self.total_votes += 1
+        if(is_bot):
+            self.bot_votes += 1
+            for answer in answers:
+                ans_str = "answer_{0}_votes".format(answer)
+                ans_count = self.__getattribute__(ans_str)
+                self.__setatt__(ans_str, ans_count+1)
+        user.save()
 
+            
 
-for cont in range(len(BOT_EXPLICATIONS)):
-    twitter_accounts_attrs["answer_{0}_votes".format(cont+1)]= models.IntegerField(default=0)
-
-Twitter_accounts = type("Twitter_accounts", (models.Model,), twitter_accounts_attrs)
+    @classmethod
+    def get_random_account(cls):
+        pass

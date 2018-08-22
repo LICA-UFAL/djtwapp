@@ -12,7 +12,9 @@ Django = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.5"
 
 [scripts]
+makemigrations = "python manage.py makemigrations"
+migrate = "python manage.py migrate"
 server = "python manage.py runserver"

@@ -8,3 +8,4 @@ def get_bot_explications():
 
 class BotExplicationForm:
     choices = forms.ChoiceField(choices=get_bot_explications())
+

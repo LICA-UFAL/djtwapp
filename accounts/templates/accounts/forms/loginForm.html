@@ -1,0 +1,25 @@
+{% load static %}
+<link href="{% static 'css/form.css' %}" rel="stylesheet">
+{% block content %}
+<form action="/accounts/login/" method="POST">
+    {% csrf_token %}
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-center default-text py-3"><i class="fa fa-lock"></i> Entrar:</h3>
+            <div class="md-form">
+                <i class="fa fa-user prefix grey-text"></i>
+                {{form.username}}
+                {{form.username.label_tag}}
+            </div>
+            <div class="md-form">
+                <i class="fa fa-lock prefix grey-text"></i>
+                {{form.password}}
+                {{form.password.label_tag}}
+            </div>
+            <div class="text-center">
+                <button class="btn btn-default waves-effect waves-light">Entrar</button>
+            </div>
+     </div>
+    </div>
+</form>
+{% endblock %}

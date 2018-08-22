@@ -32,9 +32,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    username = models.CharField(max_length=255, unique=True)
+    username = models.CharField(max_length=255, unique=True, verbose_name="Nome de usuário")
     email = models.EmailField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    vote_count = models.IntegerField(default=0)
 
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
