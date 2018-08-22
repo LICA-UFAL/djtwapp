@@ -3,8 +3,8 @@ from .models import User
 
 
 class RegisterUserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    confirm_password = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    password = forms.CharField(label='Senha' ,widget=forms.PasswordInput,)
+    confirm_password = forms.CharField(label='Confirmar senha', widget=forms.PasswordInput)
 
     class Meta:
         model = User
