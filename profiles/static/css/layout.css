@@ -19,6 +19,18 @@ h6 {
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.1rem;
+  background-color: #ee0979;
+  border-color: #ee0979;
+}
+
+
+.btn-xl:active, .btn-primary:focus, .btn-primary:hover {
+  background-color: #bd0760 !important;
+  border-color: #bd0760 !important;
+}
+
+.btn-xl:focus {
+  box-shadow: 0 0 0 0.2rem rgba(238, 9, 121, 0.5);
 }
 
 .bg-black {
@@ -55,7 +67,7 @@ header.masthead {
   overflow: hidden;
   padding-top: calc(7rem + 72px);
   padding-bottom: 7rem;
-  background: linear-gradient(0deg, #4286f4 0%, #4286f4 100%);
+  background: linear-gradient(0deg, #4286f4 70%, #4286f4 100%);
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
@@ -64,7 +76,7 @@ header.masthead {
 header.masthead .masthead-content {
   z-index: 1;
   position: relative;
-  min-height: 100%; 
+  min-height: 100%;
 }
 
 header.masthead .masthead-content .masthead-heading {
@@ -89,34 +101,4 @@ header.masthead .masthead-content .masthead-subheading {
   }
 }
 
-.bg-primary {
-  background-color: #ee0979 !important;
-}
 
-.btn-primary {
-  background-color: #ee0979;
-  border-color: #ee0979;
-}
-
-.btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-  background-color: #bd0760 !important;
-  border-color: #bd0760 !important;
-}
-
-.btn-primary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(238, 9, 121, 0.5);
-}
-
-.btn-secondary {
-  background-color: #ff6a00;
-  border-color: #ff6a00;
-}
-
-.btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
-  background-color: #cc5500 !important;
-  border-color: #cc5500 !important;
-}
-
-.btn-secondary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(255, 106, 0, 0.5);
-}

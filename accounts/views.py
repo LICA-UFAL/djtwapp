@@ -28,23 +28,23 @@ def login(request):
     else:
         loginform = LoginForm()
 
-    return render(request, "accounts/login.html", {"form": loginform, "action_url": "/accounts/login/"})
+    return render(request, "accounts/pages/login.html", {"form": loginform, "action_url": "/accounts/login/"})
 
 
 def cadastro(request):
     if(request.method == "POST"):
+        print(request.POST)
         register_user_form = RegisterUserForm(request.POST)
 
         if(register_user_form.is_valid()):
             user = register_user_form.save(commit=False)
-
             User.save_instance(user)
 
             return redirect(settings.REGISTER_REDIRECT_URL)
 
     else:
         register_user_form = RegisterUserForm()
-    return render(request, "accounts/cadastro.html", {"form": register_user_form, "action_url": "/accounts/cadastro/"})
+    return render(request, "accounts/pages/cadastro.html", {"form": register_user_form, "action_url": "/accounts/cadastro/"})
 
 
 def logout(request):
