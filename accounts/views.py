@@ -3,6 +3,8 @@ from django.contrib import auth
 from django.conf import settings
 
 from .forms import RegisterUserForm, LoginForm
+
+from profiles.models import Twitter_account
 from .models import User
 
 # Create your views here.
@@ -19,6 +21,7 @@ def login(request):
                 request, username=username, password=password)
 
             if(user is not None):
+                user.set_vote_account(Twitter_account.get_random_account())
                 auth.login(request, user)
 
                 return redirect(settings.LOGIN_REDIRECT_URL)

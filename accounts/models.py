@@ -46,11 +46,19 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
+    def __init__(self, *args, **kwargs):
+        self.vote_account = None
+
+        super().__init__(*args,**kwargs)
+
     def get_full_name(self):
         return self.username
 
     def get_short_name(self):
         return self.username
+    
+    def set_vote_account(self, twitter_account):
+        self.vote_account = twitter_account
 
     def has_perm(self, perm, obj=None):
         return True
