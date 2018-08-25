@@ -39,7 +39,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     vote_count = models.IntegerField(default=0)
-    vote_account = models.ForeignKey(Twitter_account, on_delete=None)
+    vote_account = models.ForeignKey(Twitter_account, on_delete=None, blank=True, null=True)
 
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -57,8 +57,9 @@ class User(AbstractBaseUser):
             self.vote_account.bot_votes += 1
             for answer in answers:
                 ans_str = "answer_{0}_votes".format(answer)
-                ans_count = self.__getattribute__(ans_str)
-                self.__setatt__(ans_str, ans_count+1)
+                ans_count = self.vote_account.__getattribute__(ans_str)
+                self.vote_account.__setatt__(ans_str, ans_count+1)
+        self.vote_account.save()
         self.save()
 
     def get_full_name(self):
