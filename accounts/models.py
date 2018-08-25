@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
+from profiles.models import Twitter_account
+
 # Create your models here.
 
 
@@ -36,6 +39,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     vote_count = models.IntegerField(default=0)
+    vote_account = models.ForeignKey(Twitter_account, on_delete=None)
 
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -46,19 +50,15 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    def __init__(self, *args, **kwargs):
-        self.vote_account = None
-
-        super().__init__(*args,**kwargs)
-
     def get_full_name(self):
         return self.username
 
     def get_short_name(self):
         return self.username
     
-    def set_vote_account(self, twitter_account):
-        self.vote_account = twitter_account
+    def set_vote_account(self):
+        self.vote_account = Twitter_account.get_random_account()
+        self.save()
 
     def has_perm(self, perm, obj=None):
         return True

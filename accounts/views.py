@@ -4,7 +4,6 @@ from django.conf import settings
 
 from .forms import RegisterUserForm, LoginForm
 
-from profiles.models import Twitter_account
 from .models import User
 
 # Create your views here.
@@ -21,7 +20,7 @@ def login(request):
                 request, username=username, password=password)
 
             if(user is not None):
-                user.set_vote_account(Twitter_account.get_random_account())
+                user.set_vote_account()
                 auth.login(request, user)
 
                 return redirect(settings.LOGIN_REDIRECT_URL)
@@ -36,7 +35,6 @@ def login(request):
 
 def cadastro(request):
     if(request.method == "POST"):
-        print(request.POST)
         register_user_form = RegisterUserForm(request.POST)
 
         if(register_user_form.is_valid()):
