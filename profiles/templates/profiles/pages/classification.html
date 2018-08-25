@@ -1,3 +1,7 @@
-<image src="{{ user.vote_account.image_url }}"></image>
-<label>{{ user.vote_account.name }}</label>
-<button type="submit">Classificar</button>
+<div class="text-center">
+    <image src="{{ user.vote_account.image_url }}"></image>
+    <div style="float:rigth; padding-top:10px;">
+        <label style="display:block">{{ user.vote_account.name }}</label>
+        <button id="bt" type="submit" class="btn btn-success">Verificar Conta</button>
+    </div>
+</div>
