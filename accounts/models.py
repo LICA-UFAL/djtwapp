@@ -50,12 +50,23 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
+    def vote(self, is_bot=False, answers=None):
+        self.vote_count += 1
+        self.vote_account.total_votes += 1
+        if(is_bot):
+            self.vote_account.bot_votes += 1
+            for answer in answers:
+                ans_str = "answer_{0}_votes".format(answer)
+                ans_count = self.__getattribute__(ans_str)
+                self.__setatt__(ans_str, ans_count+1)
+        self.save()
+
     def get_full_name(self):
         return self.username
 
     def get_short_name(self):
         return self.username
-    
+
     def set_vote_account(self):
         self.vote_account = Twitter_account.get_random_account()
         self.save()

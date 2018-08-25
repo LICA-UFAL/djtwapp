@@ -16,19 +16,6 @@ class Twitter_account(models.Model):
     answer_4_votes = models.IntegerField(default=0)
     answer_5_votes = models.IntegerField(default=0)
 
-    def vote(self, user, is_bot=False, answers=None):
-        user.vote_count += 1
-        self.total_votes += 1
-        if(is_bot):
-            self.bot_votes += 1
-            for answer in answers:
-                ans_str = "answer_{0}_votes".format(answer)
-                ans_count = self.__getattribute__(ans_str)
-                self.__setatt__(ans_str, ans_count+1)
-        user.save()
-
-
-
     @classmethod
     def get_random_account(cls):
-        return choice(cls.objects.all())
+        return choice(cls.objects.filter(total_votes__lte=20))
