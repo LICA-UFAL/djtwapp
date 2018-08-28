@@ -1,7 +1,12 @@
-<div class="text-center">
-    <image src="{{ user.vote_account.image_url }}"></image>
-    <div style="float:rigth; padding-top:10px;">
-        <label style="display:block">{{ user.vote_account.name }}</label>
-        <button id="bt" type="submit" class="btn btn-success">Verificar Conta</button>
+<div class="row">
+    <div class="col-md-2.7 mx-auto">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top img-thumbnail" src="{{ user.vote_account.image_url }}" alt="Card image cap" width="304" height="236">
+            <div class="card-body bg-dark">
+                <h5 class="card-title">{{user.vote_account.name}}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="https://twitter.com/{{user.vote_account.name}}" target="_blank" class="btn btn-primary">Votar na conta</a>
+            </div>
+        </div>
     </div>
 </div>
