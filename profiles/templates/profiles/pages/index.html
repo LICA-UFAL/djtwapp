@@ -1,22 +1,22 @@
 {% extends 'profiles/layout.html' %}
 
 {% block content %}
-{% if not user.is_authenticated %}
-<div class="row">
-    <div class="col-md-7">
-        <div class="masthead-content">
-         <div class="container">
-           <h1 class="masthead-heading mb-0">Bem-vindo</h1>
-           <h2 class="masthead-subheading mb-0"></h2>
-           <a href="#" class="btn btn-xl rounded-pill mt-5">Learn More</a>
-          </div>
+  {% if not user.is_authenticated %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="masthead-content">
+            <div class="container">
+              <h1 class="masthead-heading mb-0">Bem-vindo</h1>
+              <h2 class="masthead-subheading mb-0"></h2>
+              <a href="#" class="btn btn-xl rounded-pill mt-5">Learn More</a>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+          {% include "accounts/forms/loginForm.html" %}
         </div>
     </div>
-    <div class="col-md-5">
-      {% include "accounts/forms/loginForm.html" %}
-    </div>
-</div>
-{% else %}
-{% include 'profiles/pages/classification.html' %}
-{% endif %}
+  {% else %}
+    {% include 'profiles/pages/classification.html' %}
+  {% endif %}
 {% endblock %}

@@ -8,7 +8,6 @@ gunicorn = "*"
 django-heroku = "*"
 tweepy = "*"
 Django = "*"
-pandas = "*"
 
 [dev-packages]
 

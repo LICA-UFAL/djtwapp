@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
+
 <html lang="pt">
 
   <head>
-
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -12,13 +11,14 @@
     <title>Início</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap-4.1.3.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="{% static 'css/google-fonts-css-0.css' %}" rel="stylesheet">
     <link href="{% static 'css/google-fonts-css-1.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom css for this template-->
     <link href="{% static 'css/layout.css' %}" rel="stylesheet">
 
   </head>
@@ -26,14 +26,14 @@
   <body>
 
     <!-- Navigation -->
-    {% include "profiles/navbar.html" %}
+    {% include 'profiles/navbar.html' %}
 
     <!-- Content-->
     <header class="masthead text-left text-white">
       <div class="masthead-content">
         <div class="container">
-          {% block content %}
-          {% endblock %}
+            {% block content %}
+            {% endblock %}
         </div>
       </div>
     </header>
@@ -41,9 +41,8 @@
   </body>
 
   <!-- JavaScript core -->
-  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap-4.1.3.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap-4.1.3.bundle.min.js' %}"></script>
-  <script src="{% static 'js/mdbootstrap-4.4.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
 
 </html>
