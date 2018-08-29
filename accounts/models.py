@@ -39,7 +39,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     vote_count = models.IntegerField(default=0)
-    vote_account = models.ForeignKey(Twitter_account, on_delete=None, blank=True, null=True)
+    vote_account = models.ForeignKey(Twitter_account, on_delete=models.SET_NULL, blank=True, null=True)
 
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
