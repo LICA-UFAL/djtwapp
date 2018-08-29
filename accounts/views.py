@@ -44,6 +44,9 @@ def cadastro(request):
             return redirect(settings.REGISTER_REDIRECT_URL)
 
     else:
+        if(request.user.is_authenticated):
+            return redirect(settings.LOGIN_REDIRECT_URL)
+            
         register_user_form = RegisterUserForm()
     return render(request, "accounts/pages/cadastro.html", {"form": register_user_form, "action_url": "/accounts/cadastro/"})
 
