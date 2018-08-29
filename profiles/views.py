@@ -7,4 +7,13 @@ from accounts.forms import LoginForm
 
 # Create your views here.
 def index(request):
+    if(request.method == 'POST'):
+        user = request.user
+        lista = [value for name,value in request.POST.items() if(name != "csrfmiddlewaretoken")]
+
+        if(len(lista)==0):
+            user.vote()
+        else:
+            user.vote(is_bot=True, answers=lista)
+
     return render(request, "profiles/pages/index.html", {"form": LoginForm()})

@@ -10,6 +10,7 @@ class Twitter_account(models.Model):
     total_votes = models.IntegerField(default=0)
     bot_votes = models.IntegerField(default=0)
     image_url = models.CharField(max_length=255)
+    
 
     answer_1_votes = models.IntegerField(default=0)
     answer_2_votes = models.IntegerField(default=0)

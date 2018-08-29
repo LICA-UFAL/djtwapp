@@ -4,9 +4,10 @@
             <img class="card-img-top img-thumbnail" src="{{ user.vote_account.image_url }}" alt="Card image cap" width="304" height="236">
             <div class="card-body bg-dark">
                 <h5 class="card-title text-center">{{user.vote_account.name}}</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="https://twitter.com/{{user.vote_account.screen_name}}" target="_blank" class="btn btn-primary">Votar na conta</a>
+                <a href="https://twitter.com/{{user.vote_account.screen_name}}" target="_blank" class="btn btn-primary center" id="btn">Votar na conta</a>
+                {% include 'profiles/forms/form.html' %}
             </div>
         </div>
     </div>
+    <script src="static/js/classification.js"></script>
 </div>
