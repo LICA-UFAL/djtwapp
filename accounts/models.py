@@ -58,9 +58,9 @@ class User(AbstractBaseUser):
             for answer in answers:
                 ans_str = "answer_{0}_votes".format(answer)
                 ans_count = self.vote_account.__getattribute__(ans_str)
-                self.vote_account.__setatt__(ans_str, ans_count+1)
+                self.vote_account.__setattr__(ans_str, ans_count+1)
         self.vote_account.save()
-        self.save()
+        self.set_vote_account()
 
     def get_full_name(self):
         return self.username
@@ -93,3 +93,4 @@ class User(AbstractBaseUser):
     @classmethod
     def save_instance(cls, user):
         cls.objects.create_user(user.username,user.password)
+
