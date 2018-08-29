@@ -12,17 +12,24 @@ import os
 import django_heroku
 import tweepy
 
-#tweepy api
-CONSUMER_KEY = '6vWSFssZSZ6ca87IUeSkV1VR2'
-CONSUMER_SECRET = 'zftYif2YKWnkeJblQGqIMst5q50gZ1qusYubZ73Rstp6fkO0bT'
+from . import twitter_keys
 
-ACESS_TOKEN = '3755330536-ME2ulUmQGAO7ZG2I9znrvQjQDsOlTEavpauCynN'
-ACESS_TOKEN_SECRET = 'LfptIr4rQa9qKB1Lt3j2FxtThKwIaePQopz1JqwXaQCyW'
+# Tweepy keys
+CONSUMER_KEY = twitter_keys.CONSUMER_KEY
+CONSUMER_SECRET = twitter_keys.CONSUMER_SECRET
+
+ACESS_TOKEN = twitter_keys.ACESS_TOKEN
+ACESS_TOKEN_SECRET = twitter_keys.ACESS_TOKEN_SECRET
 
 AUTH = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 AUTH.set_access_token(ACESS_TOKEN, ACESS_TOKEN_SECRET)
 
+# Tweepy API
 TWEEPY_API = tweepy.API(AUTH)
+
+# Tweepy exceptions
+RATE_LIMIT_ERROR = tweepy.RateLimitError
+TWEEP_ERROR = tweepy.TweepError
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
