@@ -12,17 +12,17 @@ import os
 import django_heroku
 import tweepy
 
-from . import twitter_keys
+from . import constants
 
 # Tweepy keys
-CONSUMER_KEY = twitter_keys.CONSUMER_KEY
-CONSUMER_SECRET = twitter_keys.CONSUMER_SECRET
+CONSUMER_KEY = constants.CONSUMER_KEY
+CONSUMER_SECRET = constants.CONSUMER_SECRET
 
-ACESS_TOKEN = twitter_keys.ACESS_TOKEN
-ACESS_TOKEN_SECRET = twitter_keys.ACESS_TOKEN_SECRET
+ACCESS_TOKEN = constants.ACCESS_TOKEN
+ACCESS_TOKEN_SECRET = constants.ACCESS_TOKEN_SECRET
 
 AUTH = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-AUTH.set_access_token(ACESS_TOKEN, ACESS_TOKEN_SECRET)
+AUTH.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 # Tweepy API
 TWEEPY_API = tweepy.API(AUTH)
@@ -50,6 +50,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "https://djtwapp.herokuapp.com/"]
 # Application definition
 
 INSTALLED_APPS = [
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
