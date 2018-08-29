@@ -1,9 +1,11 @@
 /venv
 __pycache__/
 
-#pycharm ide
+# pycharm ide
 .idea/
 
-#vscode config
+# vscode config
 .vscode/
 
+# twitter keys
+twitter_keys.py
