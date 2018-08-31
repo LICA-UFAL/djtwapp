@@ -55,6 +55,8 @@ class User(AbstractBaseUser):
         self.vote_account.total_votes += 1
         if(is_bot):
             self.vote_account.bot_votes += 1
+            if(self.admin or self.staff or self.vote_account.total_votes >= 20):
+                self.vote_account.classified = True
             for answer in answers:
                 ans_str = "answer_{0}_votes".format(answer)
                 ans_count = self.vote_account.__getattribute__(ans_str)
@@ -69,7 +71,7 @@ class User(AbstractBaseUser):
         return self.username
 
     def set_vote_account(self):
-        self.vote_account = Twitter_account.get_random_account()
+        self.vote_account = Twitter_account.get_random_account(user=self)
         self.save()
 
     def has_perm(self, perm, obj=None):

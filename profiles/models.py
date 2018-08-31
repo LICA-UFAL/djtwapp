@@ -10,8 +10,8 @@ class Twitter_account(models.Model):
     total_votes = models.IntegerField(default=0)
     bot_votes = models.IntegerField(default=0)
     image_url = models.CharField(max_length=255)
+    classified = models.BooleanField(default=False)
     
-
     answer_1_votes = models.IntegerField(default=0)
     answer_2_votes = models.IntegerField(default=0)
     answer_3_votes = models.IntegerField(default=0)
@@ -22,5 +22,7 @@ class Twitter_account(models.Model):
         return self.screen_name
 
     @classmethod
-    def get_random_account(cls):
-        return choice(cls.objects.filter(total_votes__lte=20))
+    def get_random_account(cls, user):
+        if(user.is_admin or user.is_staff):
+            return choice(cls.objects.filter(total_votes=0, classified=False))
+        return choice(cls.objects.filter(classified=False))
