@@ -25,7 +25,7 @@ def login(request):
 
                 return redirect(settings.LOGIN_REDIRECT_URL)
             else:
-                print("error")
+                loginform.add_error(None,"Nome de usuário ou senha invalidos")
 
     else:
         loginform = LoginForm()
