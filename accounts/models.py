@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.hashers import make_password
+
 
 from profiles.models import Twitter_account
 
@@ -95,4 +97,8 @@ class User(AbstractBaseUser):
     @classmethod
     def save_instance(cls, user):
         cls.objects.create_user(user.username,user.password)
+
+    @classmethod
+    def get_user_by_name(cls,username):
+        return cls.objects.filter(username=username)[0]
 
