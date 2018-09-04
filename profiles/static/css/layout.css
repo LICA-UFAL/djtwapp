@@ -1,6 +1,10 @@
-body {
+html,body {
   font-family: 'Lato';
   height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
 }
 
 h1,
@@ -11,6 +15,11 @@ h5,
 h6 {
   font-family: 'Catamaran';
   font-weight: 800 !important;
+}
+
+body {
+  background-image: url("/static/img/background.jpg");
+  background-color: #cccccc;
 }
 
 .btn-xl {
@@ -41,37 +50,6 @@ h6 {
   border-radius: 5rem;
 }
 
-.navbar-custom {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.navbar-custom .navbar-brand {
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
-  font-weight: 700;
-}
-
-.navbar-custom .navbar-nav .nav-item .nav-link {
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1rem;
-}
-
-header.masthead {
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  padding-top: calc(7rem + 72px);
-  padding-bottom: 7rem;
-  background: linear-gradient(0deg, #4286f4 70%, #4286f4 100%);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: scroll;
-}
 
 header.masthead .masthead-content {
   z-index: 1;
@@ -89,10 +67,6 @@ header.masthead .masthead-content .masthead-subheading {
 
 
 @media (min-width: 992px) {
-  header.masthead {
-    padding-top: calc(10rem + 55px);
-    padding-bottom: 10rem;
-  }
   header.masthead .masthead-content .masthead-heading {
     font-size: 6rem;
   }
@@ -101,4 +75,6 @@ header.masthead .masthead-content .masthead-subheading {
   }
 }
 
-
+.content {
+  padding-top: 6em;
+} 

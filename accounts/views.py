@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.conf import settings
 
 from .forms import RegisterUserForm, LoginForm
+
 from .models import User
 
 # Create your views here.
@@ -19,11 +20,12 @@ def login(request):
                 request, username=username, password=password)
 
             if(user is not None):
+                user.set_vote_account()
                 auth.login(request, user)
 
                 return redirect(settings.LOGIN_REDIRECT_URL)
             else:
-                print("error")
+                loginform.add_error(None,"Nome de usuário ou senha invalidos")
 
     else:
         loginform = LoginForm()
@@ -33,7 +35,6 @@ def login(request):
 
 def cadastro(request):
     if(request.method == "POST"):
-        print(request.POST)
         register_user_form = RegisterUserForm(request.POST)
 
         if(register_user_form.is_valid()):
@@ -43,6 +44,9 @@ def cadastro(request):
             return redirect(settings.REGISTER_REDIRECT_URL)
 
     else:
+        if(request.user.is_authenticated):
+            return redirect(settings.LOGIN_REDIRECT_URL)
+            
         register_user_form = RegisterUserForm()
     return render(request, "accounts/pages/cadastro.html", {"form": register_user_form, "action_url": "/accounts/cadastro/"})
 

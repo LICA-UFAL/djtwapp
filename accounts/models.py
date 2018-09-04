@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.hashers import make_password
+
+
+from profiles.models import Twitter_account
+
 # Create your models here.
 
 
@@ -36,6 +41,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     vote_count = models.IntegerField(default=0)
+    vote_account = models.ForeignKey(Twitter_account, on_delete=models.SET_NULL, blank=True, null=True)
 
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -46,11 +52,29 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
+    def vote(self, is_bot=False, answers=None):
+        self.vote_count += 1
+        self.vote_account.total_votes += 1
+        if(is_bot):
+            self.vote_account.bot_votes += 1
+            if(self.admin or self.staff or self.vote_account.total_votes >= 20):
+                self.vote_account.classified = True
+            for answer in answers:
+                ans_str = "answer_{0}_votes".format(answer)
+                ans_count = self.vote_account.__getattribute__(ans_str)
+                self.vote_account.__setattr__(ans_str, ans_count+1)
+        self.vote_account.save()
+        self.set_vote_account()
+
     def get_full_name(self):
         return self.username
 
     def get_short_name(self):
         return self.username
+
+    def set_vote_account(self):
+        self.vote_account = Twitter_account.get_random_account(user=self)
+        self.save()
 
     def has_perm(self, perm, obj=None):
         return True
@@ -73,3 +97,8 @@ class User(AbstractBaseUser):
     @classmethod
     def save_instance(cls, user):
         cls.objects.create_user(user.username,user.password)
+
+    @classmethod
+    def get_user_by_name(cls,username):
+        return cls.objects.filter(username=username)[0]
+
