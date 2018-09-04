@@ -25,6 +25,7 @@ class Twitter_account(models.Model):
         self.total_votes = 0
         self.bot_votes = 0
         self.classified = False
+        self.save()
 
     @classmethod
     def get_random_account(cls, user):
