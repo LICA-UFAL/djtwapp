@@ -3,6 +3,10 @@ import time
 from djtwapp.settings import TWEEPY_API, RATE_LIMIT_ERROR, TWEEP_ERROR
 from profiles.models import Twitter_account
 
+def original_user_image(user):
+    image = user.profile_image_url_https
+    return image.replace('_normal', '')
+
 def is_valid_account(user):
     if(user.statuses_count >= 200 and user.lang == 'pt'):
         return True
@@ -24,7 +28,7 @@ def cad_dataset(screen_names):
         try:
             user = api.get_user(screen_name=screen_name)
             if(is_valid_account(user)):
-                account = Twitter_account(name=user.name, screen_name=screen_name, image_url=user.profile_image_url_https)
+                account = Twitter_account(name=user.name, screen_name=screen_name, image_url=original_user_image(user))
                 account.save()
         except RATE_LIMIT_ERROR:
             print("Rate Limit")

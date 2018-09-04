@@ -21,6 +21,11 @@ class Twitter_account(models.Model):
     def __str__(self):
         return self.screen_name
 
+    def reset_values(self):
+        self.total_votes = 0
+        self.bot_votes = 0
+        self.classified = False
+
     @classmethod
     def get_random_account(cls, user):
         if(user.is_admin or user.is_staff):
