@@ -1,17 +1,11 @@
 /venv
 __pycache__/
 
-#migrations dir
-*/migrations/
-
-#pycharm ide
+# pycharm ide
 .idea/
 
-#vscode config
+# vscode config
 .vscode/
 
-#Pipenv
-Pipfile.lock
-
-#banco de dados sqlite3
-db.sqlite3
+# twitter keys
+twitter_keys.py
