@@ -9,3 +9,6 @@ __pycache__/
 
 # twitter keys
 twitter_keys.py
+
+# firebase-credentials
+firebase_credentials.json

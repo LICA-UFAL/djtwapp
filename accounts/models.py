@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.hashers import make_password
 
-
 from profiles.models import Twitter_account
+
+from firebase_admin import db
 
 # Create your models here.
 
@@ -65,6 +66,21 @@ class User(AbstractBaseUser):
                 self.vote_account.__setattr__(ans_str, ans_count+1)
         self.vote_account.save()
         self.set_vote_account()
+        self.save_vote(self.username, self.vote_account.screen_name, is_bot)
+
+    def save_vote(self, username, screen_name, is_bot):
+        root = db.reference('/votos')
+        new_user = root.child(username).update({
+            screen_name: is_bot,
+        })
+
+    def get_vote_accounts(self):
+        root = db.reference('/votos')
+        accounts = root.child(self.username).get()
+        if(accounts != None):
+            return accounts.keys()
+        else:
+            return []
 
     def get_full_name(self):
         return self.username

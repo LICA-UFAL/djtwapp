@@ -11,8 +11,17 @@ import os
 
 import django_heroku
 import tweepy
+import firebase_admin
+from firebase_admin import credentials
 
 from . import constants
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Firebase setup
+CRED = credentials.Certificate(BASE_DIR+'/firebase_credentials.json')
+firebase_admin.initialize_app(CRED, {'databaseURL': 'https://djtwapp.firebaseio.com'})
 
 # Tweepy keys
 CONSUMER_KEY = constants.CONSUMER_KEY
@@ -30,9 +39,6 @@ TWEEPY_API = tweepy.API(AUTH)
 # Tweepy exceptions
 RATE_LIMIT_ERROR = tweepy.RateLimitError
 TWEEP_ERROR = tweepy.TweepError
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
