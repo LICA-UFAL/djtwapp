@@ -37,5 +37,5 @@ class Twitter_account(models.Model):
         for account in cls.objects.filter(classified=False):
             if(account.screen_name not in accounts):
                 res_account.append(account)
-                
+            
         return choice(res_account)
