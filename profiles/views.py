@@ -17,3 +17,9 @@ def index(request):
             user.vote(is_bot=True, answers=lista)
 
     return render(request, "profiles/pages/index.html", {"form": LoginForm()})
+
+def contato(request):
+    return render(request, "profiles/pages/contato.html", {})
+
+def guia(request):
+    return render(request, "profiles/pages/guia.html", {})
