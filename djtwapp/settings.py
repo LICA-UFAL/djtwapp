@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Firebase setup
 if "DEPLOY" in os.environ.keys():
     firebase_credentials = {}
-    firebase_credentials["private_key"]=os.environ["private_key"].replace('\\n', '\n'),
+    firebase_credentials["private_key"]=os.environ["private_key"].replace('\\n', '\n')
     firebase_credentials["private_key_id"]=os.environ["private_key_id"]
     firebase_credentials["client_email"]=os.environ["client_email"]
     firebase_credentials["client_id"]=os.environ["client_id"]
@@ -32,7 +32,7 @@ if "DEPLOY" in os.environ.keys():
     firebase_credentials["project_id"]=os.environ["project_id"]
     firebase_credentials["auth_uri"]=os.environ["auth_uri"]
     firebase_credentials["token_uri"]=os.environ["token_uri"]
-    firebase_credentials["auth_provider_x509_cert_url"]=os.environ["auth_provider_x509_cert_url"]
+
 else:
     firebase_credentials = BASE_DIR+"/firebase_credentials.json"
 
