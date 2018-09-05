@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import json
 
 import django_heroku
 import tweepy
@@ -20,7 +21,14 @@ from . import constants
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Firebase setup
-CRED = credentials.Certificate(BASE_DIR+'/firebase_credentials.json')
+firebase_credentials = json.load(open(BASE_DIR+'/firebase_credentials.json','r'))
+firebase_credentials["private_key"]=os.environ["private_key"]
+firebase_credentials["private_key_id"]=os.environ["private_key_id"]
+firebase_credentials["client_email"]=os.environ["client_email"]
+firebase_credentials["client_id"]=os.environ["client_id"]
+firebase_credentials["client_x509_cert_url"]=os.environ["client_x509_cert_url"]
+
+CRED = credentials.Certificate(firebase_credentials)
 firebase_admin.initialize_app(CRED, {'databaseURL': 'https://djtwapp.firebaseio.com'})
 
 # Tweepy keys
