@@ -25,6 +25,10 @@ class Twitter_account(models.Model):
         self.total_votes = 0
         self.bot_votes = 0
         self.classified = False
+        
+        for cont in range(5):
+            self.__setattr__("answer_{0}_votes".format(cont),0)
+
         self.save()
 
     @classmethod
