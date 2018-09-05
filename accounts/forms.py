@@ -5,7 +5,8 @@ error_messages = {
     "Username_dont_exist" : "Nome de usuário não existe",
     "Username_exist": "Nome de usuário já existe",
     "Password_invalid" : "Senha invalida",
-    "Passwords_mismatch" : "As senhas são diferentes"
+    "Passwords_mismatch" : "As senhas são diferentes",
+    "Password_len_error" : "Digite uma senha com mais de 5 digitos",
 }
 
 class RegisterUserForm(forms.ModelForm):
@@ -15,6 +16,16 @@ class RegisterUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("username", "password")
+    
+    def clean(self):
+        cleaned_data = super().clean()
+
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password and isinstance(password,str):
+            error=forms.ValidationError(error_messages["Passwords_mismatch"],code="Passwords_mismatch")
+            self.add_error("confirm_password",error)
 
     def clean_username(self):
         username = self.cleaned_data["username"]
@@ -27,16 +38,17 @@ class RegisterUserForm(forms.ModelForm):
 
         except User.DoesNotExist:
             return username
+
+    def clean_password(self):
+        password = self.cleaned_data["password"]
+
+        if self.instance.password == password:
+            return password
+        if(len(password)<6):
+            raise forms.ValidationError(error_messages["Password_len_error"],code="Password_len_error")
+        else:
+            return password
     
-    def clean(self):
-        cleaned_data = super().clean()
-
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-
-        if password != confirm_password:
-            error=forms.ValidationError(error_messages["Passwords_mismatch"],code="Passwords_mismatch")
-            self.add_error("confirm_password",error)
 
 
 class LoginForm(forms.Form):
