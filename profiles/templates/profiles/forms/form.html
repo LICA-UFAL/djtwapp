@@ -1,14 +1,10 @@
 <form hidden method="POST" action="/" id="cform">
     {% csrf_token %}
-    <a class="btn btn-primary center" id="btn1">É bot</a>
-    <button class="btn btn-primary center" id="btn2" type="submit">Não é bot</button>
-    <div hidden id="cb">
+    <a class="btn btn-primary center" id="bot">É bot</a>
+    <button class="btn btn-primary center" id="not_bot" type="submit">Não é bot</button>
+    <div hidden id="check_box_div">
         <label>É bot por causa:</label><br>
-        <input type="checkbox" name="answer_1" value="1"> Comportamento repetitivo<br>
-        <input type="checkbox" name="answer_2" value="2"> Posta em intervalos muito curto<br>
-        <input type="checkbox" name="answer_3" value="3"> Usa a conta apenas para fazer propaganda<br>
-        <input type="checkbox" name="answer_4" value="4"> É bot de uma empresa conhecida<br>
-        <input type="checkbox" name="answer_5" value="5"> É bot por conta das hashtags<br>
-        <button type="submit">Enviar</button>
+        {{ vote_form.as_p }}
+        <button type="submit" id="send" onsubmit="return validate_cform()">Enviar</button>
     </div>
 </form>
