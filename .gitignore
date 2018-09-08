@@ -13,5 +13,8 @@ twitter_keys.py
 # firebase-credentials
 firebase_credentials.json
 
+#sqlite3
+db.sqlite3
+
 #ignore constants
 constants.py

@@ -1,7 +1,6 @@
 const btn_vote = document.querySelector("#vote");  
 const btn_bot = document.querySelector("#bot");
 const btn_not_bot = document.querySelector("#not_bot");
-const btn_send_form = document.querySelector("#send")
 const cform = document.querySelector("#cform")
 const check_box_div = document.querySelector("#check_box_div")
 
@@ -33,7 +32,19 @@ btn_bot.addEventListener("click", (event) => {
     check_box_div.removeAttribute("hidden")
 });
 
+
 function validate_cform(){
-    alert("entrou");
-    return false;
+    const choices = document.getElementsByName("reasons");
+    var cont_choices = 0
+    for(var i=0; i< choices.length; i++){
+        if(choices[i].checked){
+            cont_choices+=1;
+        }
+    }
+    
+    if(cont_choices == 0){
+        const label_error = document.querySelector("#bot_choices_error")
+        label_error.removeAttribute("hidden")
+        return false
+    }
 }

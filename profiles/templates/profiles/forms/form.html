@@ -3,8 +3,12 @@
     <a class="btn btn-primary center" id="bot">É bot</a>
     <button class="btn btn-primary center" id="not_bot" type="submit">Não é bot</button>
     <div hidden id="check_box_div">
-        <label>É bot por causa:</label><br>
-        {{ vote_form.as_p }}
-        <button type="submit" id="send" onsubmit="return validate_cform()">Enviar</button>
+        <label class="text-danger" id="bot_choices_error" hidden>Selecione pelo menos uma opção</label><br>
+        {{ vote_form.reasons.label }}
+        {% for choice_fild in vote_form.reasons %}
+            {{choice_fild}}
+        {% endfor %}
+
+        <button type="submit" onclick="return validate_cform()">Enviar</button>
     </div>
 </form>
