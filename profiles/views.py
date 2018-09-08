@@ -12,12 +12,10 @@ def index(request):
         user = request.user
         vote_form = BotExplicationForm(request.POST)
 
-        if(vote_form.is_valid()):  
-            user.vote(is_bot=True, answers=vote_form.get_answers())
-    else:
-        vote_form = BotExplicationForm()
+        if(vote_form.is_valid()):
+            user.vote(is_bot=vote_form.is_bot, answers=vote_form.get_reasons())
 
-    return render(request, "profiles/pages/index.html", {"form": LoginForm(), "vote_form": vote_form})
+    return render(request, "profiles/pages/index.html", {"form": LoginForm(), "vote_form": BotExplicationForm()})
 
 def contato(request):
     return render(request, "profiles/pages/contato.html", {})

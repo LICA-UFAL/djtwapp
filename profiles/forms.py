@@ -17,19 +17,19 @@ def get_bot_explications():
 
 
 class BotExplicationForm(forms.Form):
-    choices = forms.ChoiceField(choices=get_bot_explications(), widget=forms.CheckboxSelectMultiple)
-
-    def clean_choices(self):
-        choices = self.cleaned_data["choices"]
-
-        if(len(choices) == 0):
-            raise forms.ValidationError(error_messages['NotSelectedChoice'], code='NotSelectedChoice')
+    reasons = forms.MultipleChoiceField(choices=get_bot_explications(), required=False, label="É bot por conta",
+                                         widget=forms.CheckboxSelectMultiple)
+    
+    def clean_reasons(self):
+        reasons = self.cleaned_data["reasons"]
+        if(len(self.cleaned_data["reasons"]) == 0):
+            self.is_bot = False
         else:
-            return choices
+            self.is_bot = True
+
+        
+        return reasons
 
 
-    def get_answers(self):
-        choices = self.cleaned_data["choices"]
-        print(choices)
-
-        return choices
+    def get_reasons(self):
+        return self.cleaned_data["reasons"]
