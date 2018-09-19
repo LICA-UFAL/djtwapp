@@ -6,29 +6,9 @@
             <img class="card-img-top" src="{{ user.vote_account.image_url }}" alt="Card image cap" height="236">
             <div class="card-body bg-dark">
                 <h5 class="card-title text-center">{{user.vote_account.name}}</h5>
-                <a href="https://twitter.com/{{user.vote_account.screen_name}}" data-toggle="modal" data-target="#myModal" class="btn btn-primary center" id="vote">Votar na conta</a>
+                <a href="https://twitter.com/{{user.vote_account.screen_name}}" data-toggle="modal" target="_blank" class="btn btn-primary center" id="vote">Votar na conta</a>
                 {% include 'profiles/forms/form.html' %}
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title text-dark">{{user.vote_account.name}}</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-                <a class="twitter-timeline" href="https://twitter.com/{{user.vote_account.screen_name}}?ref_src=twsrc%5Etfw">Tweets by TwitterDev</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>       
-        <!-- Modal footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        </div>
         </div>
     </div>
 </div>
