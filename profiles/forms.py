@@ -13,6 +13,11 @@ error_messages = {
 }
 
 def get_bot_explications():
+    """
+    Returns
+    --------
+    A list of tuples with pairs of number and justifications
+    """
     return [(str(count+1), explication) for count, explication in enumerate(BOT_EXPLICATIONS)]
 
 

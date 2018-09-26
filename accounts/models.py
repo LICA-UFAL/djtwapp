@@ -38,6 +38,20 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    """
+    User class
+    Attributes
+    --------
+    username : str, user name\n
+    email : str, user email\n
+    timestamp : date, creation date of user\n
+    vote_count : int, number of twitter accounts voted\n
+    vote_account : int, twitter account id that user voted\n
+    active : bool, flag for active\n
+    staff : bool, flag for staff\n
+    admin : bool, flag for admin\n
+    """
+
     username = models.CharField(max_length=255, unique=True, verbose_name="Nome de usuário")
     email = models.EmailField(max_length=255, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -54,6 +68,14 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     def vote(self, is_bot=False, answers=None):
+        """
+        Save the 
+        Parameters
+        --------
+        is_bot : bool, default=False, bot flag
+        answers: list, string list with justifications
+        """
+
         self.vote_count += 1
         self.vote_account.total_votes += 1
         if(is_bot):
@@ -83,12 +105,27 @@ class User(AbstractBaseUser):
             return []
 
     def get_full_name(self):
+        """
+        Returns
+        --------
+        User name
+        """
         return self.username
 
     def get_short_name(self):
+        """
+        Returns
+        --------
+        User name
+        """
+
         return self.username
 
+
     def set_vote_account(self):
+        """
+        Get a random twitter account and relate with current user
+        """
         self.vote_account = Twitter_account.get_random_account(user=self)
         self.save()
 

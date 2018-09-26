@@ -1,9 +1,19 @@
 from random import choice
-
 from django.db import models
 
 
 class Twitter_account(models.Model):
+    """
+    Twitter account class
+    Attributes
+    --------
+    name : Twitter account name\n
+    id : Id number of account\n
+    total_votes : Total number of votes that such account was received\n
+    bot_votes : Total number of votes that such account was received for bot class\n
+    image_url : Twitter account image url
+    """
+
     name = models.CharField(max_length=255)
     screen_name = models.CharField(max_length=255, default="default")
     id = models.IntegerField(primary_key=True, unique=True)
@@ -33,6 +43,15 @@ class Twitter_account(models.Model):
 
     @classmethod
     def get_random_account(cls, user):
+        """
+        Parameters
+        --------
+        cls : Twitter_account class
+
+        Returns
+        --------
+        A Twitter_account object
+        """
         res_account = []
         accounts = user.get_vote_accounts()
         if(user.is_admin or user.is_staff):
