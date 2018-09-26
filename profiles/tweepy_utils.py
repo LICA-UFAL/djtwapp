@@ -8,7 +8,7 @@ def original_user_image(user):
     return image.replace('_normal', '')
 
 def is_valid_account(user):
-    if(user.statuses_count >= 200 and user.lang == 'pt'):
+    if(user.statuses_count >= 200 and user.lang == 'pt' and not user.protected):
         return True
     return False
 
@@ -39,3 +39,19 @@ def cad_dataset(screen_names):
             print(e)
         except Exception as e:
             print(e)
+
+def remove_protected_account(account):
+    try:
+        _account = TWEEPY_API.get_user(screen_name=account.screen_name)
+        if(_account.protected):
+            print("conta {0} excluida".format(account.screen_name))
+            account.delete()
+    except RATE_LIMIT_ERROR:
+        print("Rate Limit")
+        for i in range(15):
+            time.sleep(60)
+            print(str(15-(i+1)) + " minutes left")
+    except TWEEP_ERROR as e:
+        print(e)
+    except Exception as e:
+        print(e)

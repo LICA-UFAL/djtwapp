@@ -1,5 +1,9 @@
 {% extends 'profiles/layout.html' %}
 
+{% block title %}
+<title>Início</title>
+{% endblock %}
+
 {% block content %}
   {% if not user.is_authenticated %}
     <div class="row cen">
@@ -7,7 +11,7 @@
             <div class="masthead-content">
             <div class="container">
               <h1 class="masthead-heading mb-0">Bem-vindo</h1>
-              <a href="/sobre/" class="btn btn-xl rounded-pill mt-5">Saber mais</a>
+              <a href="/guia/" class="btn btn-xl rounded-pill mt-5">Get started</a>
               </div>
             </div>
         </div>

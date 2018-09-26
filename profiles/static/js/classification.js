@@ -1,9 +1,10 @@
-const btn = document.querySelector("#btn");
-const btn1 = document.querySelector("#btn1");
+const btn_vote = document.querySelector("#vote");  
+const btn_bot = document.querySelector("#bot");
+const btn_not_bot = document.querySelector("#not_bot");
 const cform = document.querySelector("#cform")
-const cb = document.querySelector("#cb")
+const check_box_div = document.querySelector("#check_box_div")
 
-btn.addEventListener('click', (event) => {
+btn_vote.addEventListener('click', (event) => {
     /*btn.remove();
     let btn1 = document.createElement('button');
     let btn2 = document.createElement('button');
@@ -19,13 +20,31 @@ btn.addEventListener('click', (event) => {
     card.appendChild(btn1);
     card.appendChild(btn2);*/
 
-    btn.setAttribute("hidden","");
+    btn_vote.setAttribute("hidden","");
     cform.removeAttribute("hidden");
     
 });
 
-btn1.addEventListener("click", (event) => {
-    btn1.setAttribute("hidden","")
-    btn2.setAttribute("hidden","")
-    cb.removeAttribute("hidden")
+btn_bot.addEventListener("click", (event) => {
+    btn_bot.setAttribute("hidden","")
+    btn_not_bot.setAttribute("hidden","")
+    
+    check_box_div.removeAttribute("hidden")
 });
+
+
+function validate_cform(){
+    const choices = document.getElementsByName("reasons");
+    var cont_choices = 0
+    for(var i=0; i< choices.length; i++){
+        if(choices[i].checked){
+            cont_choices+=1;
+        }
+    }
+    
+    if(cont_choices == 0){
+        const label_error = document.querySelector("#bot_choices_error")
+        label_error.removeAttribute("hidden")
+        return false
+    }
+}

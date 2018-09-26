@@ -8,13 +8,15 @@ gunicorn = "*"
 django-heroku = "*"
 tweepy = "*"
 Django = "*"
+firebase-admin = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.5"
+python_version = "3.6"
 
 [scripts]
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
 server = "python manage.py runserver"
+shell = "python manage.py shell"

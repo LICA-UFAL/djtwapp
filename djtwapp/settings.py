@@ -8,41 +8,57 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import json
 
 import django_heroku
 import tweepy
+import firebase_admin
+from firebase_admin import credentials
 
-from . import constants
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Tweepy keys
-CONSUMER_KEY = constants.CONSUMER_KEY
-CONSUMER_SECRET = constants.CONSUMER_SECRET
+if "DEPLOY" in os.environ.keys():
+    DEPLOY = True
+else:
+    from . import credentials as _credentials
+    DEPLOY = False
 
-ACCESS_TOKEN = constants.ACCESS_TOKEN
-ACCESS_TOKEN_SECRET = constants.ACCESS_TOKEN_SECRET
+# Firebase setup
+if DEPLOY:
+    firebase_credentials = json.loads(os.environ["FIREBASE_CREDENTIALS"])
+    twitter_credentials = json.loads(os.environ["TWITTER_CREDENTIALS"])
+    django_credentials = dson.loads(os.environ["DJANGO_CREDENTIALS"])
+    
+else:
+    firebase_credentials = _credentials.firebase_credentials
+    twitter_credentials = _credentials.twitter_credentials
+    django_credentials = _credentials.django_credentials
+    database_credentials = _credentials.database_credentials
 
-AUTH = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-AUTH.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+# Firebase API
+
+CRED = credentials.Certificate(firebase_credentials)
+firebase_admin.initialize_app(CRED, {'databaseURL': 'https://djtwapp.firebaseio.com'})
 
 # Tweepy API
+
+AUTH = tweepy.OAuthHandler(twitter_credentials["CONSUMER_KEY"], twitter_credentials["CONSUMER_SECRET"])
+AUTH.set_access_token(twitter_credentials["ACCESS_TOKEN"], twitter_credentials["ACCESS_TOKEN_SECRET"])
 TWEEPY_API = tweepy.API(AUTH)
 
 # Tweepy exceptions
 RATE_LIMIT_ERROR = tweepy.RateLimitError
 TWEEP_ERROR = tweepy.TweepError
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#(_*2fl%tei_s^e5q86lljh4&wz)cf&y0%er!8==7f!0pm2lex'
+SECRET_KEY = django_credentials["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not DEPLOY
 
 ALLOWED_HOSTS = ["127.0.0.1", "https://djtwapp.herokuapp.com/"]
 
@@ -104,12 +120,10 @@ WSGI_APPLICATION = 'djtwapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+
+DATABASES = {}
+if not DEPLOY:
+    DATABASES["default"] = database_credentials
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

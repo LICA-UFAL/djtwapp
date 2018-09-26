@@ -8,7 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Início</title>
+    <!-- Title -->
+    {% block title %}
+    {% endblock %}
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/hashtag.png' %}">
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -16,6 +21,8 @@
     <!-- Custom fonts for this template -->
     <link href="{% static 'css/google-fonts-css-0.css' %}" rel="stylesheet">
     <link href="{% static 'css/google-fonts-css-1.css' %}" rel="stylesheet">
+
+    <!-- css for material -->
     <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
 
     <!-- Custom css for this template-->

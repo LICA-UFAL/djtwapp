@@ -7,5 +7,5 @@ __pycache__/
 # vscode config
 .vscode/
 
-# twitter keys
-twitter_keys.py
+#ignore credentials
+credentials.py
