@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if "DEPLOY" in os.environ.keys():
     DEPLOY = True
 else:
-    from . import credentials as _credentials
+    _credentials = json.load(open(BASE_DIR+"/credentials.json", "r"))
     DEPLOY = False
 
 # Firebase setup
@@ -31,10 +31,10 @@ if DEPLOY:
     django_credentials = dson.loads(os.environ["DJANGO_CREDENTIALS"])
     
 else:
-    firebase_credentials = _credentials.firebase_credentials
-    twitter_credentials = _credentials.twitter_credentials
-    django_credentials = _credentials.django_credentials
-    database_credentials = _credentials.database_credentials
+    firebase_credentials = _credentials["firebase_credentials"]
+    twitter_credentials = _credentials["twitter_credentials"]
+    django_credentials = _credentials["django_credentials"]
+    database_credentials = _credentials["database_credentials"]
 
 # Firebase API
 
