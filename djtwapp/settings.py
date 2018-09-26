@@ -28,7 +28,7 @@ else:
 if DEPLOY:
     firebase_credentials = json.loads(os.environ["FIREBASE_CREDENTIALS"])
     twitter_credentials = json.loads(os.environ["TWITTER_CREDENTIALS"])
-    django_credentials = dson.loads(os.environ["DJANGO_CREDENTIALS"])
+    django_credentials = json.loads(os.environ["DJANGO_CREDENTIALS"])
     
 else:
     firebase_credentials = _credentials["firebase_credentials"]
