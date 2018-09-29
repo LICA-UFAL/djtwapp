@@ -7,11 +7,6 @@ __pycache__/
 # vscode config
 .vscode/
 
-# twitter keys
-twitter_keys.py
-
-# firebase-credentials
-firebase_credentials.json
-
-#ignore constants
-constants.py
+#ignore credentials
+credentials.py
+credentials.json
