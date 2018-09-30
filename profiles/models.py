@@ -6,7 +6,7 @@ from django.db import models
 class Twitter_account(models.Model):
     name = models.CharField(max_length=255)
     screen_name = models.CharField(max_length=255, default="default")
-    id = models.IntegerField(primary_key=True, unique=True)
+    id = models.AutoField(primary_key=True)
     total_votes = models.IntegerField(default=0)
     bot_votes = models.IntegerField(default=0)
     image_url = models.CharField(max_length=255)
