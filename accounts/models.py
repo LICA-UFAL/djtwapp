@@ -58,12 +58,12 @@ class User(AbstractBaseUser):
         self.vote_account.total_votes += 1
         if(is_bot):
             self.vote_account.bot_votes += 1
-            if(self.admin or self.staff or self.vote_account.total_votes >= 20):
-                self.vote_account.classified = True
             for answer in answers:
                 ans_str = "answer_{0}_votes".format(answer)
                 ans_count = self.vote_account.__getattribute__(ans_str)
                 self.vote_account.__setattr__(ans_str, ans_count+1)
+        if(self.admin or self.staff or self.vote_account.total_votes >= 20):
+            self.vote_account.classified = True
         self.vote_account.save()
         self.save_vote(self.username, self.vote_account.screen_name, is_bot)
         self.set_vote_account()
