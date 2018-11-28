@@ -1,8 +1,11 @@
+import threading
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.hashers import make_password
 
 from profiles.models import Twitter_account
+from profiles.tweepy_utils import save_parent
 
 from firebase_admin import db
 
@@ -91,6 +94,9 @@ class User(AbstractBaseUser):
     def set_vote_account(self):
         self.vote_account = Twitter_account.get_random_account(user=self)
         self.save()
+
+        t = threading.Thread(target=save_parent,args=(self.vote_account.screen_name, 1))
+        t.start()
 
     def has_perm(self, perm, obj=None):
         return True
